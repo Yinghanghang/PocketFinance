@@ -44,7 +44,7 @@ public class DatabaseManager {
 	}
 
 	/**
-	 * Get the sum of income from 2020/1/1 to present
+	 * Get the sum of income from date1 to date2
 	 */
 	public double getIncome(LocalDate from, LocalDate to) throws SQLException {
 		try (PreparedStatement statement = conn.prepareStatement("select sum(Amount) from transaction where date between ? and ? and type=\"Income\"")) {
@@ -60,7 +60,7 @@ public class DatabaseManager {
 	}
 
 	/**
-	 * Get the sum of expense from 2020/1/1 to present
+	 * Get the sum of expense from date1 to date2
 	 */
 	public double getExpense(LocalDate from, LocalDate to) throws SQLException {
 		try (PreparedStatement statement = conn.prepareStatement("select sum(Amount) from transaction where date between ? and ? and type=\"Expense\"")) {
@@ -77,7 +77,7 @@ public class DatabaseManager {
 
 
 	/**
-	 * Get the sum of net income from 2020/1/1 to present
+	 * Get the sum of net income from date1 to date2
 	 */
 	public double getNetIncome(LocalDate from, LocalDate to) throws SQLException {
 		return getIncome(from, to) - getExpense(from, to);
