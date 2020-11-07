@@ -19,12 +19,15 @@ public class HomeController {
     @FXML
     public void addButtonAction(ActionEvent event) {
         try {
+            Stage stage = (Stage)recordAdder.getScene().getWindow();
+            stage.close();
+            Stage primaryStagestage = new Stage();
+           
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Add.fxml"));
             Parent root = (Parent)fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Add Record");
-            stage.setScene(new Scene(root));
-            stage.show();
+            primaryStagestage.setTitle("Add Record");
+            primaryStagestage.setScene(new Scene(root));
+            primaryStagestage.show();
                         
         }
         catch (Exception e) {
