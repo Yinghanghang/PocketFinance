@@ -15,10 +15,9 @@ public class Main extends Application {
 		try {
 			VBox root = (VBox)FXMLLoader.load(getClass().getResource("Home.fxml"));
 			
-			Scene scene = new Scene(root);
+			Scene scene = new Scene(root,400,400);
 			
 			primaryStage.setScene(scene);
-			primaryStage.setTitle("PocketFinance");
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();

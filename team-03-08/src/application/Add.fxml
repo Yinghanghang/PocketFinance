@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AddController">
+<VBox prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AddController">
    <children>
       <HBox prefHeight="78.0" prefWidth="400.0">
          <VBox.margin>
@@ -34,7 +34,7 @@
       </HBox>
       <HBox prefHeight="78.0" prefWidth="400.0">
          <children>
-            <Label prefHeight="42.0" prefWidth="86.0" text="Type: ">
+            <Label prefHeight="42.0" prefWidth="86.0" text="Label: ">
                <HBox.margin>
                   <Insets left="40.0" />
                </HBox.margin>
@@ -42,12 +42,12 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <CheckBox fx:id="expenseCheckBox" mnemonicParsing="false" onAction="#uncheckIncome" prefHeight="42.0" prefWidth="129.0" text="Expense">
+            <CheckBox mnemonicParsing="false" prefHeight="42.0" prefWidth="129.0" text="Expense">
                <font>
                   <Font size="18.0" />
                </font>
             </CheckBox>
-            <CheckBox fx:id="incomeCheckBox" mnemonicParsing="false" onAction="#uncheckExpense" prefHeight="42.0" prefWidth="131.0" text="Income">
+            <CheckBox mnemonicParsing="false" prefHeight="42.0" prefWidth="131.0" text="Income">
                <font>
                   <Font size="18.0" />
                </font>
@@ -81,7 +81,7 @@
                   <Insets left="40.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="amountInput" prefHeight="42.0" prefWidth="183.0">
+            <TextField prefHeight="42.0" prefWidth="183.0">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
@@ -90,8 +90,7 @@
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-         	<Button fx:id="cancelAdder" mnemonicParsing="false" onAction="#cancelButtonAction" prefHeight="48.0" prefWidth="86.0" text="Cancel">
-<!--          	<Button mnemonicParsing="false" prefHeight="48.0" prefWidth="86.0" text="Cancel"> -->
+            <Button fx:id="goBack" mnemonicParsing="false" onAction="#goBack" prefHeight="48.0" prefWidth="101.0" text="Go Back">
                <HBox.margin>
                   <Insets left="40.0" />
                </HBox.margin>
@@ -99,8 +98,9 @@
                   <Font size="18.0" />
                </font>
             </Button>
-<Button fx:id="saveAdder" mnemonicParsing="false" onAction="#saveButtonAction" prefHeight="48.0" prefWidth="86.0" text="Save">               <HBox.margin>
-                  <Insets left="130.0" />
+            <Button fx:id="add" mnemonicParsing="false" onAction="#add" prefHeight="48.0" prefWidth="101.0" text="Add">
+               <HBox.margin>
+                  <Insets left="110.0" />
                </HBox.margin>
                <font>
                   <Font size="18.0" />
