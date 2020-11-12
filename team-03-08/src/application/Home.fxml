@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HomeController">
+<VBox prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HomeController">
    <children>
       <Label alignment="CENTER" prefHeight="43.0" prefWidth="400.0" text="Pocket Finance" textAlignment="CENTER" textFill="#aa6060">
          <font>
@@ -25,8 +25,9 @@
       </Label>
       <MenuButton alignment="CENTER" mnemonicParsing="false" text="Chart Mode">
         <items>
-          <MenuItem mnemonicParsing="false" text="Bar Chart" />
-          <MenuItem mnemonicParsing="false" text="Pie Chart" />
+          <MenuItem mnemonicParsing="false" text="Expense" />
+          <MenuItem mnemonicParsing="false" text="Income" />
+            <MenuItem mnemonicParsing="false" text="Net Income" />
         </items>
          <VBox.margin>
             <Insets left="20.0" top="20.0" />
@@ -39,7 +40,7 @@
                   <Insets left="20.0" />
                </HBox.margin>
             </Label>
-            <DatePicker fx:id="fromDate"  onAction="#setTotals" prefHeight="25.0" prefWidth="133.0" />
+            <DatePicker fx:id="fromDate" onAction="#setTotals" prefHeight="25.0" prefWidth="133.0" />
             <Label alignment="CENTER" prefHeight="23.0" prefWidth="34.0" text="To: " />
             <DatePicker fx:id="toDate" onAction="#setTotals" prefHeight="25.0" prefWidth="133.0" />
          </children>
@@ -51,12 +52,12 @@
       	  <children>
 		      <Label prefHeight="99.0" prefWidth="260.0" text="Total Expense">
 		         <VBox.margin>
-		            <Insets left="20.0" bottom="-30.0" />
+		            <Insets bottom="-30.0" left="20.0" />
 		         </VBox.margin>
 		      </Label>
 		      <HBox prefHeight="20.0" prefWidth="400.0">
 		      	<children>
-	              <TextField fx:id="expensesField" prefHeight="42.0" prefWidth="100.0" editable="false">
+	              <TextField fx:id="expensesField" editable="false" prefHeight="42.0" prefWidth="100.0">
 	                 <HBox.margin>
 	                    <Insets left="20.0" />
 	                 </HBox.margin>
@@ -65,12 +66,12 @@
               </HBox>
 		      <Label prefHeight="99.0" prefWidth="260.0" text="Total Income">
 		         <VBox.margin>
-		            <Insets left="20.0" bottom="-30.0" />
+		            <Insets bottom="-30.0" left="20.0" />
 		         </VBox.margin>
 		      </Label>
 		      <HBox prefHeight="20.0" prefWidth="400.0">
 		      	<children>
-	              <TextField fx:id="incomeField" prefHeight="42.0" prefWidth="100.0" editable="false">
+	              <TextField fx:id="incomeField" editable="false" prefHeight="42.0" prefWidth="100.0">
 	                 <HBox.margin>
 	                    <Insets left="20.0" />
 	                 </HBox.margin>
@@ -79,12 +80,12 @@
               </HBox>
 		      <Label prefHeight="99.0" prefWidth="260.0" text="Total Net Income">
 		         <VBox.margin>
-		            <Insets left="20.0" bottom="-30.0" />
+		            <Insets bottom="-30.0" left="20.0" />
 		         </VBox.margin>
 		      </Label>
 		      <HBox prefHeight="20.0" prefWidth="400.0">
 		      	<children>
-	              <TextField fx:id="netIncomeField" prefHeight="42.0" prefWidth="100.0" editable="false">
+	              <TextField fx:id="netIncomeField" editable="false" prefHeight="42.0" prefWidth="100.0">
 	                 <HBox.margin>
 	                    <Insets left="20.0" />
 	                 </HBox.margin>
