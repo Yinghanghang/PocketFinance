@@ -15,7 +15,7 @@ public class Main extends Application {
 		try {
 			VBox root = (VBox)FXMLLoader.load(getClass().getResource("Home.fxml"));
 			
-			Scene scene = new Scene(root,400,400);
+			Scene scene = new Scene(root,400,500);
 			
 			primaryStage.setScene(scene);
 			primaryStage.show();
