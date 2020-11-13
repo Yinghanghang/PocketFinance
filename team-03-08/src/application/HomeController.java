@@ -91,6 +91,7 @@ public class HomeController implements Initializable{
         }
         catch (Exception e) {
             System.out.println("Cannot load new window");
+            e.printStackTrace();
         }
     }
     
