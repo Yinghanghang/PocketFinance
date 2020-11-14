@@ -59,7 +59,7 @@ public class HomeController implements Initializable{
     	fromDate.setValue(firstDayOfMonth);
     	
     	//Query the database with default values and set the total fields 
-    	conn = DatabaseManager.create("jdbc:mysql://localhost:3306/pocket_finance", "root", "Cannucks123!"); //Change this to your information on your machine
+    	conn = DatabaseManager.create("jdbc:mysql://localhost:3306/project", "root", "yingying"); //Change this to your information on your machine
     	expensesField.setText("$" + String.valueOf(getTotalExpenses()));
     	incomeField.setText("$" + String.valueOf(getTotalExpenses()));
     	netIncomeField.setText("$" + String.valueOf(getTotalExpenses()));

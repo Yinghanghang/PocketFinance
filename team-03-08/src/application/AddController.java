@@ -44,8 +44,11 @@ public class AddController implements Initializable {
 
 	@FXML
 	private ChoiceBox<String> categories;
-	private static String[] items = { "Gas", "Grocery", "Entertainment", "Miscellaneous" };
+	private static String[] items = { "Transport", "Education", "Entertainment", "Food", "Health", "Mortgage", "Shopping", "Travel", "Utilities"  };
 	
+	/**
+	 * date after current date or negative amount is not allowed
+	 */
 	private String errorPrompt = "Invalid Input. Please ensure that these fields have correct data: \n";
 	private String invalidFields;
 	private DatabaseManager conn;
@@ -156,7 +159,7 @@ public class AddController implements Initializable {
 
 		if(this.isValid()) {
 			double amount = Double.parseDouble(amountInput.getText());
-			conn = DatabaseManager.create("jdbc:mysql://localhost:3306/pocket_finance", "root", "Cannucks123!"); //Change this to your information on your machine
+			conn = DatabaseManager.create("jdbc:mysql://localhost:3306/project", "root", "yingying"); //Change this to your information on your machine
 			conn.addTransaction(new Transaction(Date.valueOf(transactionDate.getValue()),  amount, categories.getValue(), typeValue));
 			Alert addAlert = new Alert(Alert.AlertType.INFORMATION);
 			addAlert.setTitle("Confirmation");
