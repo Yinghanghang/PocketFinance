@@ -12,12 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseManager {
-	private Connection conn;
+	private Connection conn;	
+	private static DatabaseManager instance = null;
 
 	/**
 	 * Creates a connection to database.
+	 * @throws ClassNotFoundException 
 	 */
-	private DatabaseManager(String database, String user, String password) throws SQLException {
+	private DatabaseManager(String database, String user, String password) throws SQLException, ClassNotFoundException {
 		this.conn = DriverManager.getConnection(database, user, password);	
 	}
 
@@ -25,8 +27,11 @@ public class DatabaseManager {
 	 * Creates a database manager.
 	 */
 	public static DatabaseManager create(String database, String user, String password) throws ClassNotFoundException, SQLException { 
-		Class.forName("com.mysql.jdbc.Driver");
-		return new DatabaseManager(database, user, password);
+		if (instance == null) {
+			Class.forName("com.mysql.jdbc.Driver");
+			instance = new DatabaseManager(database, user, password);
+		}
+		return instance;
 	}
 
 	/**
