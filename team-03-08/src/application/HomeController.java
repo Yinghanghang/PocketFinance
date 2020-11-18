@@ -59,10 +59,10 @@ public class HomeController implements Initializable{
     	fromDate.setValue(firstDayOfMonth);
     	
     	//Query the database with default values and set the total fields 
-    	conn = DatabaseManager.create("jdbc:mysql://localhost:3306/project", "root", "yingying"); //Change this to your information on your machine
-    	expensesField.setText("$" + String.valueOf(getTotalExpenses()));
-    	incomeField.setText("$" + String.valueOf(getTotalExpenses()));
-    	netIncomeField.setText("$" + String.valueOf(getTotalExpenses()));
+    	conn = DatabaseManager.create("jdbc:mysql://localhost:3306/pocket_finance", "root", "Cannucks123!"); //Change this to your information on your machine
+    	expensesField.setText("$" + String.format("%.2f", getTotalExpenses()));
+    	incomeField.setText("$" + String.format("%.2f", getTotalIncome()));
+    	netIncomeField.setText("$" + String.format("%.2f", getTotalNetIncome()));
     }
     
     public void setTotals(ActionEvent event) throws ClassNotFoundException, SQLException {
