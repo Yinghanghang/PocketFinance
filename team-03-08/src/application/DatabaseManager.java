@@ -24,7 +24,7 @@ public class DatabaseManager {
 	}
 
 	/**
-	 * Creates a database manager.
+	 * Creates a database manager with singleton pattern.
 	 */
 	public static DatabaseManager create(String database, String user, String password) throws ClassNotFoundException, SQLException { 
 		if (instance == null) {
