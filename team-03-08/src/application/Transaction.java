@@ -22,4 +22,8 @@ public class Transaction {
 	public String category() { return category; }
 	
 	public String type() { return type; }
+	
+	public String toString() {
+		return date.toString() + type + amount;
+	}
 }
