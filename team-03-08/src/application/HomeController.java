@@ -21,6 +21,8 @@ public class HomeController implements Initializable{
     @FXML
     private Button recordAdder;
     @FXML
+    private Button chartBtn;
+    @FXML
     private DatePicker fromDate;
     @FXML
     private DatePicker toDate;
@@ -59,7 +61,7 @@ public class HomeController implements Initializable{
     	fromDate.setValue(firstDayOfMonth);
     	
     	//Query the database with default values and set the total fields 
-    	conn = DatabaseManager.create("jdbc:mysql://localhost:3306/pocket_finance", "root", "Cannucks123!"); //Change this to your information on your machine
+    	conn = DatabaseManager.create("jdbc:mysql://localhost:3306/pocket_finance", "root", "root!"); //Change this to your information on your machine
     	expensesField.setText("$" + String.format("%.2f", getTotalExpenses()));
     	incomeField.setText("$" + String.format("%.2f", getTotalIncome()));
     	netIncomeField.setText("$" + String.format("%.2f", getTotalNetIncome()));
@@ -85,6 +87,26 @@ public class HomeController implements Initializable{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Add.fxml"));
             Parent root = (Parent)fxmlLoader.load();
             primaryStagestage.setTitle("Add Record");
+            primaryStagestage.setScene(new Scene(root));
+            primaryStagestage.show();
+                        
+        }
+        catch (Exception e) {
+            System.out.println("Cannot load new window");
+            e.printStackTrace();
+        }
+    }
+    
+    @FXML
+    public void chartAction(ActionEvent event) {
+        try {
+            Stage stage = (Stage)chartBtn.getScene().getWindow();
+            stage.close();
+            Stage primaryStagestage = new Stage();
+           
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BarChart.fxml"));
+            Parent root = (Parent)fxmlLoader.load();
+            primaryStagestage.setTitle("Chart & Analysis");
             primaryStagestage.setScene(new Scene(root));
             primaryStagestage.show();
                         
