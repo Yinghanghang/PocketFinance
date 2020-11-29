@@ -311,6 +311,36 @@ public class DatabaseManager {
 	}
 	
 	/**
+	 * return a list of pie chart sector
+	 */
+	public List<PieChartSector> getPieChart(int year, Month month) throws SQLException {
+		LocalDate from = LocalDate.of(year, month, 1);
+		LocalDate to = LocalDate.of(year, month, month.length(from.isLeapYear()));
+		try (PreparedStatement statement = conn.prepareStatement(
+				"SELECT Category, sum(Amount) / data.total from transaction\n" + 
+				"CROSS JOIN (\n" + 
+				"  SELECT sum(Amount) as total from transaction \n" + 
+				"  WHERE DATE between ? and ?\n" + 
+				"  and type = 'Expense'\n" + 
+				") data\n" + 
+				"WHERE DATE between ? and ?\n" + 
+				"and type = 'Expense'\n" + 
+				"GROUP BY Category, data.total;")) {
+			statement.setDate(1, Date.valueOf(from));
+			statement.setDate(2, Date.valueOf(to));
+			statement.setDate(3, Date.valueOf(from));
+			statement.setDate(4, Date.valueOf(to));
+			try (ResultSet resultSet = statement.executeQuery()) {
+				ArrayList<PieChartSector> list = new ArrayList<>();
+				while (resultSet.next()) {			
+					list.add(new PieChartSector(resultSet.getString(1), resultSet.getDouble(2)));	
+				}
+				return list;
+			}
+		}
+	}
+	
+	/**
 	 * add transaction to database
 	 */
 	public boolean addTransaction(Transaction transaction) throws SQLException {
