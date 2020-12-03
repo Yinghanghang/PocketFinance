@@ -185,7 +185,7 @@ public class AddController implements Initializable {
 
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Home.fxml"));
 			Parent root = (Parent) fxmlLoader.load();
-			primaryStagestage.setTitle("Add Record");
+			primaryStagestage.setTitle("Home");
 			primaryStagestage.setScene(new Scene(root));
 			primaryStagestage.show();
 		} catch (Exception e) {
