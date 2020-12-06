@@ -9,31 +9,63 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
 
-<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.BarChartController">
+<VBox prefHeight="400.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.BarChartController">
    <children>
       <HBox prefHeight="60.0" prefWidth="746.0">
          <children>
-            <MenuButton mnemonicParsing="false" text="Type">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Expense" />
-                  <MenuItem mnemonicParsing="false" text="Income" />
-                  <MenuItem mnemonicParsing="false" text="Net Income" />
-               </items>
-               <HBox.margin>
-                  <Insets left="30.0" top="24.0" />
+			<Label prefHeight="23.0" prefWidth="50.0" text="Type: ">
+				<HBox.margin>
+					<Insets left="20.0" top="24.0" />
+				</HBox.margin>
+			</Label>
+            <ChoiceBox fx:id="typeSelection" prefHeight="22.0" prefWidth="90.0">
+				<HBox.margin>
+                  <Insets left="-17.0" top="24.0" />
                </HBox.margin>
-            </MenuButton>
-            <MenuButton mnemonicParsing="false" text="Period">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Daily" />
-                  <MenuItem mnemonicParsing="false" text="Weekly" />
-                  <MenuItem mnemonicParsing="false" text="Monthly" />
-               </items>
-               <HBox.margin>
+			</ChoiceBox>
+            <Label prefHeight="23.0" prefWidth="50.0" text="Period: ">
+				<HBox.margin>
+					<Insets left="20.0" top="24.0" />
+				</HBox.margin>
+			</Label>
+            <ChoiceBox fx:id="periodSelection"  onAction="#toggleMonthlySelection" prefHeight="22.0" prefWidth="70.0">
+				<HBox.margin>
+                  <Insets left="-10.0" top="24.0" />
+               </HBox.margin>
+			</ChoiceBox>
+			<Label fx:id="monthLabel" prefHeight="23.0" prefWidth="50.0" text="Month:  ">
+				<HBox.margin>
+					<Insets left="20.0" top="24.0" />
+				</HBox.margin>
+			</Label>
+			<Label fx:id="monthNA" prefHeight="23.0" prefWidth="50.0" text="N/A">
+				<HBox.margin>
+					<Insets left="0.0" top="24.0" />
+				</HBox.margin>
+			</Label>
+            <ChoiceBox fx:id="monthSelection" prefHeight="22.0" prefWidth="90.0">
+				<HBox.margin>
+                  <Insets left="-55.0" top="24.0" />
+               </HBox.margin>
+			</ChoiceBox>
+			<Label prefHeight="23.0" prefWidth="50.0" text="Year: ">
+				<HBox.margin>
+					<Insets left="20.0" top="24.0" />
+				</HBox.margin>
+			</Label>
+            <ChoiceBox fx:id="yearSelection" prefHeight="22.0" prefWidth="60.0">
+				<HBox.margin>
+                  <Insets left="-10.0" top="24.0" />
+               </HBox.margin>
+			</ChoiceBox>
+			<Button fx:id="updateChart" onAction="#updateChart" prefHeight="22.0" prefWidth="60.0" text="Go">
+				<HBox.margin>
                   <Insets left="20.0" top="24.0" />
-               </HBox.margin>
-            </MenuButton>
+               	</HBox.margin>
+			</Button>
          </children>
       </HBox>
       <BarChart fx:id="barChart" prefHeight="284.0" prefWidth="600.0">

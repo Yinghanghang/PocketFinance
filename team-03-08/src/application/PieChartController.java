@@ -34,9 +34,6 @@ public class PieChartController implements Initializable {
     
     @FXML
     private ChoiceBox<Month> monthSelection;
-//    private ChoiceBox<String> monthSelection;
-//    private static String[] months = {"January", "February","March","April","May","June","July","August","September","October",
-//    		"November","December"};
     
     @FXML
     private ChoiceBox<Integer> yearSelection;
@@ -44,10 +41,11 @@ public class PieChartController implements Initializable {
     
     @FXML
     private ObservableList<PieChart.Data> pieChartList;
-    private DatabaseManager conn;
     
     @FXML
     private PieChart pieChart;
+    
+    private DatabaseManager conn;
     
     public void goBack(ActionEvent event) {
         try {
@@ -70,6 +68,11 @@ public class PieChartController implements Initializable {
 	*/
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		try {
+			conn = DatabaseManager.create("jdbc:mysql://localhost:3306/pocket_finance", "root", "Cannucks123!");
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
 		initMonthSelection();
 		initYearSelection();
 		initPieChart();
@@ -102,7 +105,6 @@ public class PieChartController implements Initializable {
 	private void initPieChart() {
 		pieChartList = FXCollections.observableArrayList();
 		try {
-			conn = DatabaseManager.create("jdbc:mysql://localhost:3306/pocket_finance", "root", "Cannucks123!");
 			categoryData = "";
 			for(PieChartSector pieChartData: conn.getPieChart(yearSelection.getValue(), monthSelection.getValue())) {
 				pieChartList.add(new PieChart.Data(pieChartData.category(), pieChartData.percentage()));
@@ -116,7 +118,7 @@ public class PieChartController implements Initializable {
 			
 			categoriesArea.setText(categoryData);
 			
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch ( SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
@@ -126,6 +128,7 @@ public class PieChartController implements Initializable {
 	/*
 	 * Function: Update page when a different month is selected
 	*/
+	@FXML
 	public void updateChartFromMonth(ActionEvent event) {
 		monthSelection.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 			@Override
@@ -155,6 +158,7 @@ public class PieChartController implements Initializable {
 	/*
 	 * Function: Update page when a different year is selected
 	*/
+	@FXML
 	public void updateChartFromYear(ActionEvent event) {
 		yearSelection.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 			@Override

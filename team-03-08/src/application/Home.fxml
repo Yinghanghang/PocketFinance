@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -23,16 +24,20 @@
             <Font size="13.0" />
          </font>
       </Label>
-      <MenuButton alignment="CENTER" mnemonicParsing="false" text="Chart Mode">
-        <items>
-          <MenuItem mnemonicParsing="false" text="Expense" />
-          <MenuItem mnemonicParsing="false" text="Income" />
-            <MenuItem mnemonicParsing="false" text="Net Income" />
-        </items>
-         <VBox.margin>
-            <Insets left="20.0" top="20.0" />
-         </VBox.margin>
-      </MenuButton>
+	 <HBox prefHeight="28.0" prefWidth="400.0">
+         <children>
+            <Label prefHeight="23.0" prefWidth="200.0" text="Chart Mode">
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </Label>
+            </children>
+            </HBox>
+	<ChoiceBox fx:id="chartMenu" onAction="#chartMenuAction" prefHeight="44.0" prefWidth="107.0">
+		<HBox.margin>
+			<Insets left="20.0" />
+		</HBox.margin>
+	</ChoiceBox>
       <HBox prefHeight="28.0" prefWidth="400.0">
          <children>
             <Label prefHeight="23.0" prefWidth="34.0" text="From: ">
@@ -99,11 +104,6 @@
             <Button fx:id="recordAdder" mnemonicParsing="false" onAction="#addButtonAction" prefHeight="36.0" prefWidth="120.0" text="Add Record">
                <HBox.margin>
                   <Insets left="20.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="chartBtn" alignment="CENTER" mnemonicParsing="false" onAction="#chartAction" prefHeight="36.0" prefWidth="120.0" text="Export &amp; Analysis">
-               <HBox.margin>
-                  <Insets left="100.0" />
                </HBox.margin>
             </Button>
          </children>
