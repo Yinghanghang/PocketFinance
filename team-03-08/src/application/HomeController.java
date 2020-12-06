@@ -76,9 +76,9 @@ public class HomeController implements Initializable{
     }
     
     public void setTotals(ActionEvent event) throws ClassNotFoundException, SQLException {
-    	expensesField.setText("$" + String.valueOf(getTotalExpenses()));
-    	incomeField.setText("$" + String.valueOf(getTotalIncome()));
-    	netIncomeField.setText("$" + String.valueOf(getTotalNetIncome()));
+    	expensesField.setText("$" + String.format("%.2f", getTotalExpenses()));
+    	incomeField.setText("$" + String.format("%.2f", getTotalIncome()));
+    	netIncomeField.setText("$" + String.format("%.2f", getTotalNetIncome()));
     }
     
     private double getTotalExpenses() throws SQLException { return conn.getExpense(fromDate.getValue(), toDate.getValue()); }

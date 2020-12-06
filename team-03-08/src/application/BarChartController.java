@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
@@ -53,12 +54,7 @@ public class BarChartController implements Initializable{
     @FXML Button updateChart;
     
     @FXML
-    private BarChart<?,?> barChart;
-    
-    private CategoryAxis x;
-    
-    private NumberAxis y;
-    
+    private BarChart<?,?> barChart; 
    
     private XYChart.Series barChartData;
         
@@ -73,38 +69,18 @@ public class BarChartController implements Initializable{
 		try {
 			conn = DatabaseManager.create("jdbc:mysql://localhost:3306/pocket_finance", "root", "Cannucks123!");
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		initTypeSelection();
 		initPeriodSelection();
 		initMonthSelection();
 		initYearSelection();
-		
+
 		barChartData = new XYChart.Series<>();
-		try {
-			DailyRecord[] recordSet = new DailyRecord[monthSelection.getValue().length(true)]; //create a set that is size of month
-			for(DailyRecord dailyExpense: conn.getDailyExpense(yearSelection.getValue(), monthSelection.getValue())) {
-				recordSet[dailyExpense.day()-1] = dailyExpense;
-//				barChartData.getData().add(new XYChart.Data<>(""+dailyExpense.day(), dailyExpense.amount()));
-			}
-			
-			//create bar chart data set to display
-			for(int i=0; i<recordSet.length; i++) {
-				if(recordSet[i] != null) {
-					barChartData.getData().add(new XYChart.Data<>(Integer.toString(i+1), recordSet[i].amount()));
-				}
-				else {
-					barChartData.getData().add(new XYChart.Data<>(Integer.toString(i+1), 0.0));
-				}
-			}
-			barChart.getData().removeAll(barChart.getData());
-			barChart.getData().addAll(barChartData);
-			barChart.setBarGap(0.0);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		barChart.setLegendVisible(false);
+		barChart.setAnimated(false);
+		getDaily("Expense");
+		
 	}
 	
 	/*
@@ -175,6 +151,8 @@ public class BarChartController implements Initializable{
 						barChartData.getData().add(new XYChart.Data<>(Integer.toString(i+1), 0.0));
 					}
 				}
+				
+				
 				barChart.getData().removeAll(barChart.getData());
 				barChart.getData().addAll(barChartData);
 				barChart.setBarGap(0.0);
@@ -262,7 +240,6 @@ public class BarChartController implements Initializable{
 				barChart.getData().addAll(barChartData);
 				barChart.setBarGap(0.0);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -411,6 +388,7 @@ public class BarChartController implements Initializable{
 		}
 	}
 	
+	@FXML
 	public void updateChart(ActionEvent event) {
 		barChartData = new XYChart.Series<>();
 		String type = typeSelection.getValue();
@@ -460,6 +438,57 @@ public class BarChartController implements Initializable{
 			}
 		}
 	}
+	
+	private void updateChart() {
+		barChartData = new XYChart.Series<>();
+		String type = typeSelection.getValue();
+		
+		if(type.equals("Expense")) {
+			if(periodSelection.getValue().equals("Daily")) {
+				getDaily(type);
+			}
+			
+			//TODO Fix initial call 
+			else if(periodSelection.getValue().equals("Weekly")) {
+				getWeekly(type);
+			}
+			//TODO Fix initial call 
+			else if(periodSelection.getValue().equals("Monthly")) {
+				getMonthly(type);
+			}
+		}
+		
+		else if(type.equals("Income")) {
+			if(periodSelection.getValue().equals("Daily")) {
+				getDaily(type);
+			}
+			
+			//TODO Fix initial call 
+			else if(periodSelection.getValue().equals("Weekly")) {
+				getWeekly(type);
+			}
+			//TODO Fix initial call 
+			else if(periodSelection.getValue().equals("Monthly")) {
+				getMonthly(type);
+			}
+		}
+		
+		else if(type.equals("Net Income")) {
+			if(periodSelection.getValue().equals("Daily")) {
+				getDaily(type);
+			}
+			
+			//TODO Fix initial call 
+			else if(periodSelection.getValue().equals("Weekly")) {
+				getWeekly(type);
+			}
+			//TODO Fix initial call 
+			else if(periodSelection.getValue().equals("Monthly")) {
+				getMonthly(type);
+			}
+		}
+	}
+	
 	public void goBack(ActionEvent event) {
         try {
             Stage stage = (Stage) goBack.getScene().getWindow();

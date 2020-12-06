@@ -66,9 +66,17 @@
                   <Insets left="40.0" />
                </HBox.margin>
             </Label>
+            <Label prefHeight="23.0" prefWidth="50.0" text="N/A">
+            	<font>
+            		<Font size="20.0" />
+            	</font>
+				<HBox.margin>
+					<Insets left="5.0" top="9.0" />
+				</HBox.margin>
+			</Label>
             <ChoiceBox fx:id="categories" prefHeight="42.0" prefWidth="140.0">
                <HBox.margin>
-                  <Insets left="40.0" />
+                  <Insets left="-50.0" />
                </HBox.margin>
             </ChoiceBox>
          </children>

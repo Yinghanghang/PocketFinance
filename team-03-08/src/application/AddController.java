@@ -69,6 +69,7 @@ public class AddController implements Initializable {
 	@FXML
 	public void uncheckIncome(ActionEvent event) {
 		this.incomeCheckBox.setSelected(false);
+		this.categories.setVisible(true);
 		typeValue = "Expense";
 	}
 	  
@@ -79,6 +80,7 @@ public class AddController implements Initializable {
 	@FXML
 	public void uncheckExpense(ActionEvent event) {
 		this.expenseCheckBox.setSelected(false);
+		this.categories.setVisible(false);
 		typeValue = "Income";
 	}
 	  
@@ -118,7 +120,7 @@ public class AddController implements Initializable {
 	*/
 	private boolean dateIsValid() {
 		//if input date is a future date
-		if(transactionDate.getValue().compareTo(LocalDate.now())>0) {
+		if(transactionDate.getValue() ==  null || transactionDate.getValue().compareTo(LocalDate.now())>0) {
 			return false;
 		}
 		return true;
@@ -135,7 +137,7 @@ public class AddController implements Initializable {
 	}
 	
 	private boolean categoryIsValid() {
-		if(categories.getValue()==null) {
+		if(categories.getValue()==null && expenseCheckBox.isSelected()) {
 			return false;
 		}
 		return true;
