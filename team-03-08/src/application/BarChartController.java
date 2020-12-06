@@ -87,7 +87,6 @@ public class BarChartController implements Initializable{
 			for(DailyRecord dailyExpense: conn.getDailyExpense(yearSelection.getValue(), monthSelection.getValue())) {
 				recordSet[dailyExpense.day()-1] = dailyExpense;
 //				barChartData.getData().add(new XYChart.Data<>(""+dailyExpense.day(), dailyExpense.amount()));
-				System.out.println("Day: " + dailyExpense.day() + " Amount: " + dailyExpense.amount());
 			}
 			
 			//create bar chart data set to display
@@ -144,10 +143,7 @@ public class BarChartController implements Initializable{
 		yearSelection.getItems().addAll(years);
 		yearSelection.setValue(LocalDate.now().getYear());
 	}
-	
-	
-	
-	
+
 	
 	@FXML
 	public void toggleMonthlySelection(ActionEvent event) {
@@ -253,7 +249,8 @@ public class BarChartController implements Initializable{
 				for(int i=0; i<recordSet.length; i++) {
 					//start = i*7+1, end = 7(i+1)
 					String startDay = Integer.toString(7*i+1);
-					String endDay = Integer.toString(7*(i+1));
+					
+					String endDay = Integer.toString(Integer.min(7*(i+1), monthSelection.getValue().length(true)));
 					if(recordSet[i] != null) {
 						barChartData.getData().add(new XYChart.Data<>(startDay + "-" + endDay, recordSet[i].amount()));
 					}
@@ -283,7 +280,7 @@ public class BarChartController implements Initializable{
 				for(int i=0; i<recordSet.length; i++) {
 					//start = i*7+1, end = 7(i+1)
 					String startDay = Integer.toString(7*i+1);
-					String endDay = Integer.toString(7*(i+1));
+					String endDay = Integer.toString(Integer.min(7*(i+1), monthSelection.getValue().length(true)));
 					if(recordSet[i] != null) {
 						barChartData.getData().add(new XYChart.Data<>(startDay + "-" + endDay, recordSet[i].amount()));
 					}
@@ -314,7 +311,7 @@ public class BarChartController implements Initializable{
 				for(int i=0; i<recordSet.length; i++) {
 					//start = i*7+1, end = 7(i+1)
 					String startDay = Integer.toString(7*i+1);
-					String endDay = Integer.toString(7*(i+1));
+					String endDay = Integer.toString(Integer.min(7*(i+1), monthSelection.getValue().length(true)));
 					if(recordSet[i] != null) {
 						barChartData.getData().add(new XYChart.Data<>(startDay + "-" + endDay, recordSet[i].amount()));
 					}

@@ -46,6 +46,7 @@ public class PieChartController implements Initializable {
     private PieChart pieChart;
     
     private DatabaseManager conn;
+    private boolean isInitialized = false;
     
     public void goBack(ActionEvent event) {
         try {
@@ -73,9 +74,10 @@ public class PieChartController implements Initializable {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
-		initMonthSelection();
 		initYearSelection();
+		initMonthSelection();
 		initPieChart();
+		isInitialized = true; // to fix the Null Pointer exception
 	}
 	
 	/*
@@ -135,21 +137,25 @@ public class PieChartController implements Initializable {
 			public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {	
 				pieChartList = FXCollections.observableArrayList();
 				categoryData = "";
-				try {
-					
-					for(PieChartSector pieChartData: conn.getPieChart(yearSelection.getValue(),(Month.of(number2.intValue()+1)))) {
-						pieChartList.add(new PieChart.Data(pieChartData.category(), pieChartData.percentage()));
-						categoryData += "" + pieChartData.category() + ": " + String.format("%.2f",pieChartData.percentage()*100) + "% \n ";
+				if(isInitialized) {
+					try {
+
+						for (PieChartSector pieChartData : conn.getPieChart(yearSelection.getValue(),
+								(Month.of(number2.intValue() + 1)))) {
+							pieChartList.add(new PieChart.Data(pieChartData.category(), pieChartData.percentage()));
+							categoryData += "" + pieChartData.category() + ": "
+									+ String.format("%.2f", pieChartData.percentage() * 100) + "% \n ";
+						}
+						pieChart.setData(pieChartList);
+						if (!hasData(categoryData))
+							categoryData = "No Data";
+						categoriesArea.setText(categoryData);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-					pieChart.setData(pieChartList);	
-					if(!hasData(categoryData))
-						categoryData = "No Data";
-					categoriesArea.setText(categoryData);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} 
-				
+
+				}
 			}
 		});
 		
@@ -165,20 +171,24 @@ public class PieChartController implements Initializable {
 			public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {	
 				pieChartList = FXCollections.observableArrayList();
 				String categoryData = "";
-				try {
-					for(PieChartSector pieChartData: conn.getPieChart(years[number2.intValue()], monthSelection.getValue())) {
-						pieChartList.add(new PieChart.Data(pieChartData.category(), pieChartData.percentage()));
-						categoryData += "" + pieChartData.category() + ": " + String.format("%.2f",pieChartData.percentage()*100) + "% \n ";
+				if(isInitialized) {
+					try {
+						for (PieChartSector pieChartData : conn.getPieChart(years[number2.intValue()],
+								monthSelection.getValue())) {
+							pieChartList.add(new PieChart.Data(pieChartData.category(), pieChartData.percentage()));
+							categoryData += "" + pieChartData.category() + ": "
+									+ String.format("%.2f", pieChartData.percentage() * 100) + "% \n ";
+						}
+						pieChart.setData(pieChartList);
+						if (!hasData(categoryData))
+							categoryData = "No Data";
+						categoriesArea.setText(categoryData);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-					pieChart.setData(pieChartList);	
-					if(!hasData(categoryData))
-						categoryData = "No Data";
-					categoriesArea.setText(categoryData);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} 
-				
+
+				}
 			}
 		});
 		
